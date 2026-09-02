@@ -1,2 +1,7 @@
 # Italy-Heatwave-Excess-Mortality-2022
-Analysis of the summer 2022 heatwave's impact on mortality in Italy, combining ERA5 hourly temperature data (Python/xarray) with national weekly mortality data. A linear time-series model estimates excess mortality (~26,800 deaths) and examines the temperature-mortality relationship via binned regressions.
+
+This project examines the consequences of the summer 2022 heatwave for Italy, loosely inspired by Ballester et al. (2023, Nature Medicine), who studied the mortality-temperature relationship across Europe at NUTS3 resolution. Here, the analysis uses national-level mortality data for Italy, so results differ in scope from the original study.
+
+Hourly 2-meter temperature data for Italy (2015–2023) are retrieved from the ERA5 reanalysis dataset via the Copernicus Climate Data Store API (Python, `xarray`/`cdsapi`), then aggregated into weekly means across the Italian grid. Weekly mortality data for Italy (2015–2023) are sourced from the World Mortality Dataset and converted to actual calendar dates using ISO week conventions.
+
+A simple time-series linear model of mortality (with weekly fixed effects and a linear year trend) is fitted on pre-pandemic data (before March 2020) to estimate expected "normal" mortality. This model is then used to predict expected mortality for summer 2022 and compute excess mortality (observed minus predicted deaths) week by week. The analysis estimates a total of approximately 26,800 excess deaths in Italy during summer 2022. Finally, the relationship between weekly temperature and excess mortality is explored using binned scatterplot regressions (`binsreg`), visualizing how mortality responds to temperature extremes.
